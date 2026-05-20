@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Dashboard Admin</h2>
+
+<div class="alert alert-success">
+Total Artikel: {{ total }}
+</div>
+
+<a href="/admin/articles/article/" class="btn btn-primary">
+Kelola Artikel
+</a>
+
+{% endblock %}

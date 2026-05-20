@@ -1,26 +1,64 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Blog Website</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>Blog Website</h1>
+{% block content %}
+
+<h1>Artikel Terbaru</h1>
 
 {% if articles %}
-    {% for article in articles %}
-        <hr>
-        <h2>
+<div class="row">
+
+{% for article in articles %}
+<div class="col-md-4">
+
+<div class="card mb-3">
+    <div class="card-body">
+
+        <h5 class="card-title">
             <a href="/article/{{ article.id }}">
                 {{ article.title }}
             </a>
-        </h2>
+        </h5>
 
-        <p>{{ article.content|truncatewords:20 }}</p>
-    {% endfor %}
+        <p>
+            {{ article.content|truncatewords:20 }}
+        </p>
+
+        <a href="/article/{{ article.id }}" class="btn btn-primary">
+            Baca Selengkapnya
+        </a>
+
+    </div>
+</div>
+
+</div>
+{% endfor %}
+
+</div>
+
 {% else %}
-    <p>Belum ada artikel.</p>
+<p>Belum ada artikel.</p>
 {% endif %}
 
-</body>
-</html>
+{% endblock %}
+
+<div class="mt-4">
+
+{% if articles.has_previous %}
+<a class="btn btn-secondary"
+   href="?page={{ articles.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">
+   Previous
+</a>
+{% endif %}
+
+<span class="mx-2">
+Page {{ articles.number }} of {{ articles.paginator.num_pages }}
+</span>
+
+{% if articles.has_next %}
+<a class="btn btn-secondary"
+   href="?page={{ articles.next_page_number }}{% if query %}&q={{ query }}{% endif %}">
+   Next
+</a>
+{% endif %}
+
+</div>

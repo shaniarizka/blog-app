@@ -1,5 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <h1>{{ article.title }}</h1>
+
+{% if article.image %}
+<img src="{{ article.image.url }}" class="img-fluid mb-3">
+{% endif %}
 
 <p>{{ article.content }}</p>
 
-<a href="/">Kembali</a>
+<a href="/" class="btn btn-secondary">
+    Kembali
+</a>
+
+{% endblock %}
