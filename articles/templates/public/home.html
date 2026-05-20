@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Website</title>
+</head>
+<body>
+
+<h1>Blog Website</h1>
+
+{% if articles %}
+    {% for article in articles %}
+        <hr>
+        <h2>
+            <a href="/article/{{ article.id }}">
+                {{ article.title }}
+            </a>
+        </h2>
+
+        <p>{{ article.content|truncatewords:20 }}</p>
+    {% endfor %}
+{% else %}
+    <p>Belum ada artikel.</p>
+{% endif %}
+
+</body>
+</html>
