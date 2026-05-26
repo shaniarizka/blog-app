@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load humanize %}
 {% block content %}
 
 <div class="card shadow border-0">
@@ -9,11 +9,17 @@
 <h1>{{ article.title }}</h1>
 
 {% if article.category %}
-
-<span class="badge bg-primary mb-3">
-    {{ article.category.name }}
-</span>
-
+<div class="mb-3">
+    <span class="category-text">
+        {{ article.category.name }}
+    </span>
+    <span class="text-secondary">
+        •
+    </span>
+    <small class="text-secondary">
+        {{ article.created_at|naturaltime }}
+    </small>
+</div>
 {% endif %}
 
 {% if article.image %}
