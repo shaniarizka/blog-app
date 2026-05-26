@@ -2,16 +2,34 @@
 
 {% block content %}
 
+<div class="card shadow border-0">
+
+<div class="card-body">
+
 <h1>{{ article.title }}</h1>
 
-{% if article.image %}
-<img src="{{ article.image.url }}" class="img-fluid mb-3">
+{% if article.category %}
+
+<span class="badge bg-primary mb-3">
+    {{ article.category.name }}
+</span>
+
 {% endif %}
 
-<p>{{ article.content }}</p>
+{% if article.image %}
+<img src="{{ article.image.url }}"
+     class="img-fluid rounded mb-3">
+{% endif %}
+
+<div class="article-content">
+    {{ article.content|linebreaks }}
+</div>
 
 <a href="/" class="btn btn-secondary">
     Kembali
 </a>
+
+</div>
+</div>
 
 {% endblock %}

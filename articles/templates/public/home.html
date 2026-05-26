@@ -1,64 +1,136 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block content %}
 
-<h1>Artikel Terbaru</h1>
+<!-- HERO -->
+<div class="p-4 mb-4 bg-light rounded-3 shadow-sm">
+    <h1 class="fw-bold">
+        MyBlog
+    </h1>
 
-{% if articles %}
-<div class="row">
+    <p class="text-muted mb-0">
+        Portal berita sederhana menggunakan Django Framework.
+    </p>
+</div>
 
-{% for article in articles %}
-<div class="col-md-4">
+<!-- SEARCH + FILTER -->
+<div class="card border-0 shadow-sm mb-4">
+<div class="card-body">
+<form method="GET">
+<div class="row g-2">
 
-<div class="card mb-3">
-    <div class="card-body">
+    <!-- SEARCH -->
+    <div class="col-md-6">
+        <input type="text"
+               name="q"
+               class="form-control"
+               placeholder="Cari berita..."
+               value="{{ request.GET.q }}">
+    </div>
 
-        <h5 class="card-title">
-            <a href="/article/{{ article.id }}">
-                {{ article.title }}
-            </a>
-        </h5>
+    <!-- CATEGORY -->
+    <div class="col-md-4">
+        <select name="category"
+                class="form-select">
+            <option value="">
+                Semua Kategori
+            </option>
+            {% for category in categories %}
+            <option value="{{ category.id }}"
+                {% if request.GET.category == category.id|stringformat:"s" %}
+                    selected
+                {% endif %}
+            >
+                {{ category.name }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
 
-        <p>
-            {{ article.content|truncatewords:20 }}
-        </p>
-
-        <a href="/article/{{ article.id }}" class="btn btn-primary">
-            Baca Selengkapnya
-        </a>
-
+    <!-- BUTTON -->
+    <div class="col-md-2 d-grid">
+        <button class="btn btn-dark">
+            Search
+        </button>
     </div>
 </div>
-
+</form>
 </div>
+</div>
+
+<!-- NEWS LIST -->
+<div class="d-flex flex-column gap-4">
+{% for article in articles %}
+<a href="/article/{{ article.id }}"
+   class="text-decoration-none text-dark">
+<div class="news-card p-3 shadow-sm">
+    <div class="row align-items-center">
+
+        <!-- TEXT -->
+        <div class="col-md-9">
+            <h3 class="news-title">
+                {{ article.title }}
+            </h3>
+
+            <p class="news-content text-muted">
+                {{ article.content|truncatewords:25 }}
+            </p>
+
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                {% if article.category %}
+                <span class="category-text">
+                    {{ article.category.name }}
+                </span>
+                <span class="text-secondary">
+                    •
+                </span>
+                {% endif %}
+
+                <small class="text-secondary">
+                    {{ article.created_at|naturaltime }}
+                </small>
+
+            </div>
+        </div>
+
+        <!-- IMAGE -->
+        <div class="col-md-3 text-end">
+            {% if article.image %}
+                <img src="{{ article.image.url }}"
+                     class="news-image">
+            {% endif %}
+        </div>
+    </div>
+</div>
+</a>
 {% endfor %}
-
 </div>
 
-{% else %}
-<p>Belum ada artikel.</p>
-{% endif %}
+<!-- PAGINATION -->
+{% if articles.has_previous or articles.has_next %}
+<nav class="mt-5">
+<ul class="pagination justify-content-center">
+    {% if articles.has_previous %}
+    <li class="page-item">
+        <a class="page-link"
+           href="?page={{ articles.previous_page_number }}">
+           Previous
+        </a>
+    </li>
+    {% endif %}
 
+    {% if articles.has_next %}
+    <li class="page-item">
+        <a class="page-link"
+           href="?page={{ articles.next_page_number }}">
+           Next
+        </a>
+    </li>
+    {% endif %}
+</ul>
+</nav>
+
+{% endif %}
 {% endblock %}
-
-<div class="mt-4">
-
-{% if articles.has_previous %}
-<a class="btn btn-secondary"
-   href="?page={{ articles.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">
-   Previous
-</a>
-{% endif %}
-
-<span class="mx-2">
-Page {{ articles.number }} of {{ articles.paginator.num_pages }}
-</span>
-
-{% if articles.has_next %}
-<a class="btn btn-secondary"
-   href="?page={{ articles.next_page_number }}{% if query %}&q={{ query }}{% endif %}">
-   Next
-</a>
-{% endif %}
-
-</div>

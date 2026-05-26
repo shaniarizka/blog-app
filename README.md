@@ -1,39 +1,98 @@
-# Blog Management App
+# 📰 MyBlog - Portal berita sederhana menggunakan Django Framework
 
-## Install
+Aplikasi web portal berita sederhana menggunakan Django Framework dengan sistem halaman public dan dashboard admin CRUD.
 
-pip install django
-pip install pillow
+# Fitur Utama
+## Halaman Public
+* Landing page berita
+* Detail berita
+* Search berita
+* Filter kategori
+* Responsive UI
+* Human readable time (contoh: 5 jam lalu)
 
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
+## Dashboard Admin
+* Login admin
+* Dashboard statistik sederhana
+* CRUD berita
+* CRUD kategori
+* Upload gambar berita
 
-## Cara Menjalankan Project
+# Teknologi yang Digunakan
+* Django untuk Backend Framework
+* Bootstrap 5 untuk Frontend UI
+* SQLite untuk Database
+* Django Admin untuk Dashboard CRUD
+* HTML/CSS untuk tampilan website
 
-git clone LINK_REPO
+# Struktur Folder
+blog-app/
+│
+├── articles/
+│   ├── migrations/
+│   ├── templates/
+│   │   ├── public/
+│   │   └── dashboard/
+│   ├── admin.py
+│   ├── models.py
+│   ├── urls.py
+│   └── views.py
+│
+├── blog_project/
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+│
+├── media/
+├── templates/
+│   └── base.html
+│
+├── db.sqlite3
+├── manage.py
+└── README.md
 
-cd django-blog-app
+# Cara Install & Menjalankan
+1. Clone Repository
+    git clone https://github.com/shaniarizka/blog-app
+2. Masuk Folder Project
+    cd blog-app
+3. Buat Virtual Environment
+    python -m venv venv
+4. Aktifkan Virtual Environment
+    Windows
+    venv\\Scripts\\activate
+    Linux/Mac
+    source venv/bin/activate
+5. Install Dependency
+    pip install django pillow
+6. Jalankan Migration
+    python manage.py migrate
+7. Buat Superuser
+    python manage.py createsuperuser
+8. Jalankan Server
+    python manage.py runserver
+9. Buka Browser
+    Homepage: http://127.0.0.1:8000/
+    Admin: http://127.0.0.1:8000/admin
 
-python -m venv venv
-venv\Scripts\activate  # windows
+# Akun Admin
+Gunakan akun superuser yang dibuat saat menjalankan:
+    python manage.py createsuperuser
 
-pip install -r requirements.txt
+# Tampilan Aplikasi
+## Public Page
+* List berita
+* Search berita
+* Filter kategori
+* Detail berita
 
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
+## Dashboard Admin
+* CRUD berita
+* CRUD kategori
+* Statistik sederhana
 
-Fitur
-- Landing Page
-- Artikel Publik
-- Search Artikel
-- Pagination
-- Admin Login
-- Dashboard Admin
-- CRUD Artikel
+# Database
+Project menggunakan SQLite database bawaan Django.
 
-Teknologi
-- Django
-- SQLite
-- Bootstrap
+# Developer
+Project dibuat untuk memenuhi tugas UAS Praktikum PPL menggunakan Django Framework.

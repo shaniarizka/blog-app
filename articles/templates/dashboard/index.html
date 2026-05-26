@@ -1,14 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Dashboard Admin</h2>
 
-<div class="alert alert-success">
-Total Artikel: {{ total }}
+<h2 class="mb-4 fw-bold">
+    Dashboard Admin
+</h2>
+
+<p class="text-muted">
+    Login sebagai <b>{{ request.user.username }}</b>
+</p>
+
+<!-- STAT CARD -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="text-muted">
+                    Total Artikel
+                </h5>
+                <h1 class="fw-bold">
+                    {{ total }}
+                </h1>
+            </div>
+        </div>
+    </div>
 </div>
 
-<a href="/admin/articles/article/" class="btn btn-primary">
-Kelola Artikel
-</a>
+<!-- ACTION -->
+<div class="mb-4">
+    <a href="/admin/articles/article/"
+       class="btn btn-success">
+        Kelola Artikel
+    </a>
+</div>
+
+<!-- INFO -->
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <h5 class="mb-3">
+            Informasi Dashboard
+        </h5>
+        <p class="mb-1">
+            • Dashboard hanya dapat diakses admin.
+        </p>
+        <p class="mb-1">
+            • Admin dapat melakukan CRUD artikel.
+        </p>
+        <p class="mb-0">
+            • Halaman public dapat diakses semua pengguna.
+        </p>
+    </div>
+</div>
 
 {% endblock %}
