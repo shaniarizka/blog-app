@@ -60,7 +60,7 @@ blog-app/
     python -m venv venv
 4. Aktifkan Virtual Environment
     Windows
-    venv\\Scripts\\activate
+    venv\Scripts\activate
     Linux/Mac
     source venv/bin/activate
 5. Install Dependency
